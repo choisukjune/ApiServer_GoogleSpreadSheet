@@ -17,46 +17,39 @@ var url = require('url');
 var ROOT_PATH = process.cwd();
 
 var CP_COMMAND = {};
-	CP_COMMAND.MONGO = "../Binary/mongodb/mongodb-macos-x86_64-6.0.4/bin/mongosh" 
+	//CP_COMMAND.MONGO = "../Binary/mongodb/mongodb-macos-x86_64-6.0.4/bin/mongosh" 
+    CP_COMMAND.MONGO = "mongosh" 
 
 var DBJS_DIRECTORY_PATH = ROOT_PATH + "/dbjs/";
-var _tDbjs_PATH = ROOT_PATH + "/tdbjs/";
-var _JSON_PATH = ROOT_PATH.replace( /\\/gi, "/" ) + "/../crawler_sale_data/";
+    var _tDbjs_PATH = ROOT_PATH + "/tdbjs/";
+    var _JSON_PATH = ROOT_PATH.replace( /\\/gi, "/" ) + "/../crawler_sale_data/";
 
-//-------------------------------------------------------;
-// FUNCTION;
-//-------------------------------------------------------;
-//-------------------------;
-//-------------------------;
-//-------------------------;
-//-------------------------;
-//-------------------------;
+    //-------------------------------------------------------;
+    // FUNCTION;
+    //-------------------------------------------------------;
+    //-------------------------;
+    //-------------------------;
+    //-------------------------;
+    //-------------------------;
+    //-------------------------;
 
-/*
- * @function
- * @param {String} dbjsNm
- * @param {boolean} bResult
- * @return {String} r
- */
-var exec_query_DB = function( dbjsNm, bResult ){
+    /*
+        * @function
+        * @param {String} dbjsNm
+        * @param {boolean} bResult
+        * @return {String} r
+        */
+    var exec_query_DB = function( dbjsNm, bResult ){
 
-	var DBJS_NM = dbjsNm;
-	var FILE_PATH = ROOT_PATH + "/dbjs/" + DBJS_NM;
+        var DBJS_NM = dbjsNm;
+        var FILE_PATH = ROOT_PATH + "/dbjs/" + DBJS_NM;
 
-	var _t_command = CP_COMMAND.MONGO + " --username <!=ID=!> --password <!=PWD=!> --authenticationDatabase admin --host <!=HOST=!> --port <!=PORT=!> admin <!=FILE_PATH=!>";
-	if( bResult ) _t_command = _t_command + " > " + dbjsNm + "__" + Date.now() + ".result";
-	
-	var command = _t_command.replace( "<!=ID=!>", global.CONST.MongoDB.OPTIONS.self.ID )
-		.replace( "<!=PWD=!>", global.CONST.MongoDB.OPTIONS.self.PWD )
-		.replace( "<!=HOST=!>", global.CONST.MongoDB.OPTIONS.self.HOST )
-		.replace( "<!=PORT=!>", global.CONST.MongoDB.OPTIONS.self.PORT )
-		.replace( "<!=FILE_PATH=!>", FILE_PATH );
-	console.log( command )
-	var r = cp.execSync( command ).toString();
-		r = deleteLines( r , 4 )
-	return r;
-};
-
+        var command = CP_COMMAND.MONGO + ` "mongodb+srv://tjrwns:tjrwns2482%21%40@cluster0.980xizm.mongodb.net/Cluster0" ${FILE_PATH}`
+        console.log( command )
+        var r = cp.execSync( command ).toString();
+            r = deleteLines( r , 8 )
+        return r;
+    };
 //-------------------------;
 //-------------------------;
 //-------------------------;
@@ -242,6 +235,64 @@ var paramToObject = function( _url ){
 		res.end( r )	
 
 	});
+    /**
+	 * 쿼리파일을 실행하는 라우터
+	 * @function
+	 * @param {http.ClientRequest} req
+	 * <code>
+		{
+
+		}
+	* </code>
+	*
+	* @param {http.ClientResponse} res
+	* <code>
+		{
+
+		}
+	* </code>
+	*
+	* @example
+	* <code>
+		http://localhost:8888/insertAll
+	* </code>
+	*/
+	global.server.addRouter("/insertOne",function( req, res, data ){
+		
+		var routerNm = req.url.split("?")[0];
+		
+		var _tdbjs_nm = "insertOne";
+		
+		res.statusCode = 200;
+		res.setHeader( "Access-Control-Allow-Headers", "Content-Type" );
+		res.setHeader( "Access-Control-Allow-Origin", "*" );
+		res.setHeader( "Access-Control-Allow-Methods", "OPTIONS,POST,GET" );
+		console.log( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ); 
+		
+		try
+		{
+			var _tQuery = fs.readFileSync( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ).toString();
+		}
+		catch( err )
+		{
+			console.log( routerNm + " - DBJS File Not Found! - " + err );
+			res.end("{ sucess : 0, data : null }");
+		}
+		delete data[ "$height" ];
+		var query = _tQuery.replace( "<!=DATA=!>", JSON.stringify( data ) );
+		var dbjs_nm = "insertOne.dbjs";
+
+		var FILE_PATH = DBJS_DIRECTORY_PATH + dbjs_nm;
+		
+		console.log( FILE_PATH )
+
+		fs.writeFileSync( DBJS_DIRECTORY_PATH + dbjs_nm , query, { flag : "w" } );
+
+		var r = exec_query_DB( dbjs_nm )
+        console.log( r )
+		res.end( r );
+
+	});
 	/**
 	 * 쿼리파일을 실행하는 라우터
 	 * @function
@@ -300,6 +351,7 @@ var paramToObject = function( _url ){
 		fs.writeFileSync( DBJS_DIRECTORY_PATH + dbjs_nm , query, { flag : "w" } );
 
 		var r = exec_query_DB( dbjs_nm )
+        
 		res.end( r )	
 
 	});

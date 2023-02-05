@@ -1,12 +1,13 @@
 var db_nm = "camp";
 var col_nm = "all";
-var data = {"_id":125,"J":"[초4~6] 카카오프렌즈와 함께하는 코딩 운동회(스크래치)"}
 
 var db0 = db.getSiblingDB( db_nm );
 var col0 = db0.getCollection( col_nm );
 
-var _q = { _id : data._id };
 
-col0.update( _q, { $set: data } )
+var _q = { _id : ObjectId( "63ddeed5b747a8cb7f132c53" ) };
+var set = {"B":"고대부중 - update Test"}
+
+col0.update( _q, { $set: set } )
 
 printjson( 0 )

@@ -6,6 +6,6 @@ var col0 = db0.getCollection( col_nm );
 
 var data = <!=DATA=!>
 
-var r = col0.inertOne(data);
+var r = col0.insertOne(data);
 
-printjson( r )
+printjson( r.insertedId )

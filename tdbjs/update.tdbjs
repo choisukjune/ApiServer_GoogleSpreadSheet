@@ -1,12 +1,13 @@
 var db_nm = "camp";
 var col_nm = "all";
-var data = <!=DATA=!>
 
 var db0 = db.getSiblingDB( db_nm );
 var col0 = db0.getCollection( col_nm );
 
-var _q = { _id : data._id };
 
-col0.update( _q, { $set: data } )
+var _q = { _id : ObjectId( <!=DOC_id=!> ) };
+var set = <!=DATA=!>
+
+col0.update( _q, { $set: set } )
 
 printjson( 0 )

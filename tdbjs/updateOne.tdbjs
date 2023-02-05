@@ -1,11 +1,12 @@
 var db_nm = "camp";
 var col_nm = "all";
+var data = <!=DATA=!>
 
 var db0 = db.getSiblingDB( db_nm );
 var col0 = db0.getCollection( col_nm );
 
-var data = <!=DATA=!>
+var _q = { _id : data._id };
 
-var r = col0.inertOne(data);
+col0.update( _q, { $set: data } )
 
-printjson( r )
+printjson( 0 )

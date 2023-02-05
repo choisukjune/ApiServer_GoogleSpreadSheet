@@ -18,7 +18,8 @@ var url = require('url');
 var ROOT_PATH = process.cwd();
 
 var CP_COMMAND = {};
-	CP_COMMAND.MONGO = "../Binary/mongodb/mongodb-macos-x86_64-6.0.4/bin/mongosh" 
+	//CP_COMMAND.MONGO = "../Binary/mongodb/mongodb-macos-x86_64-6.0.4/bin/mongosh" 
+    CP_COMMAND.MONGO = "mongosh" 
 
 var DBJS_DIRECTORY_PATH = ROOT_PATH + "/dbjs/";
 var _tDbjs_PATH = ROOT_PATH + "/tdbjs/";
@@ -44,14 +45,7 @@ var exec_query_DB = function( dbjsNm, bResult ){
 	var DBJS_NM = dbjsNm;
 	var FILE_PATH = ROOT_PATH + "/dbjs/" + DBJS_NM;
 
-	var _t_command = CP_COMMAND.MONGO + " --username <!=ID=!> --password <!=PWD=!> --authenticationDatabase admin --host <!=HOST=!> --port <!=PORT=!> admin <!=FILE_PATH=!>";
-	if( bResult ) _t_command = _t_command + " > " + dbjsNm + "__" + Date.now() + ".result";
-	
-	var command = _t_command.replace( "<!=ID=!>", global.CONST.MongoDB.OPTIONS.self.ID )
-		.replace( "<!=PWD=!>", global.CONST.MongoDB.OPTIONS.self.PWD )
-		.replace( "<!=HOST=!>", global.CONST.MongoDB.OPTIONS.self.HOST )
-		.replace( "<!=PORT=!>", global.CONST.MongoDB.OPTIONS.self.PORT )
-		.replace( "<!=FILE_PATH=!>", FILE_PATH );
+	var command = CP_COMMAND.MONGO + ` "mongodb+srv://tjrwns:tjrwns2482%21%40@cluster0.980xizm.mongodb.net/Cluster0" ${FILE_PATH}`
 	console.log( command )
 	var r = cp.execSync( command ).toString();
 		r = deleteLines( r , 8 )
