@@ -48,7 +48,7 @@ var exec_query_DB = function( dbjsNm, bResult ){
 	var command = CP_COMMAND.MONGO + ` "mongodb+srv://tjrwns:tjrwns2482%21%40@cluster0.980xizm.mongodb.net/Cluster0" ${FILE_PATH}`
 	console.log( command )
 	var r = cp.execSync( command ).toString();
-		r = deleteLines( r , 4 )
+		r = deleteLines( r , 8 )
 	return r;
 };
 
