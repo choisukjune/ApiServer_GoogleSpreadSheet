@@ -172,7 +172,7 @@ var parseJwt = function(token) {
 		console.log( credentialInfo )
 		try
 		{
-			var _tQuery = fs.readFileSync( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ).toString();
+			var _tQuery = fs.readFileSync( _tDbjs_PATH + _tdbjs_nm + ".tdbjs" ).toString();
 		}
 		catch( err )
 		{
