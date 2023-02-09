@@ -103,10 +103,7 @@ var atob = function(base64){
 
 var parseJwt = function(token) {
 	var base64Url = token.split('.')[1];
-	console.log(base64Url)
 	var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-	console.log(base64)
-	console.log(atob)
 	var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
 		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 	}).join(''));
@@ -172,7 +169,7 @@ var parseJwt = function(token) {
 		}
 		console.log( o )
 
-		var a = parseJwt( o.credential )
+		var credentialInfo = parseJwt( o.credential )
 		try
 		{
 			var _tQuery = fs.readFileSync( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ).toString();
@@ -183,7 +180,7 @@ var parseJwt = function(token) {
 			res.end("{ sucess : 0, data : null }");
 		}
 		
-		var query = _tQuery;;
+		var query = _tQuery.replace("<!=DATA=!>", JSON.stringify( credentialInfo ));
 		var dbjs_nm = "oauthGoogle.dbjs";
 
 		var FILE_PATH = DBJS_DIRECTORY_PATH + dbjs_nm;
