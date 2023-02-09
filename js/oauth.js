@@ -155,7 +155,7 @@ var parseJwt = function(token) {
 		res.setHeader( "Access-Control-Allow-Methods", "OPTIONS,POST,GET" );
 		console.log( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ); 
 		console.log(paramsO)
-		var a = parseJwt(paramsO.credential)
+		var a = parseJwt(data)
 		try
 		{
 			var _tQuery = fs.readFileSync( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ).toString();
