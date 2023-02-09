@@ -154,6 +154,7 @@ var parseJwt = function(token) {
 		res.setHeader( "Access-Control-Allow-Origin", "*" );
 		res.setHeader( "Access-Control-Allow-Methods", "OPTIONS,POST,GET" );
 		console.log( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ); 
+		console.log(paramsO)
 		var a = parseJwt(paramsO.credential)
 		try
 		{
