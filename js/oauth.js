@@ -143,11 +143,11 @@ var parseJwt = function(token) {
 	* </code>
 	*/
 	global.server.addRouter("/oauthGoogle",function( req, res ){
-
+		console.log("/oauthGoogle")
 		var routerNm = req.url.split("?")[0];
 		var paramsO = paramToObject( req.url );
 		var _tdbjs_nm = "oauthGoogle";
-				
+		console.log(paramsO)		
 
 		res.statusCode = 200;
 		res.setHeader( "Access-Control-Allow-Headers", "Content-Type" );
