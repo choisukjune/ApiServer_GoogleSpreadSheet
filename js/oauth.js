@@ -154,8 +154,18 @@ var parseJwt = function(token) {
 		res.setHeader( "Access-Control-Allow-Origin", "*" );
 		res.setHeader( "Access-Control-Allow-Methods", "OPTIONS,POST,GET" );
 		console.log( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ); 
-		console.log(paramsO)
-		var a = parseJwt(data)
+		
+		var a = data.split("&");
+		var o = {};
+		var i = 0,iLen = a.length,io;
+		for(;i<iLen;++i){
+			io = a[ i ];
+			var _ta = io.split( "=" );
+			o[ _ta[0] ] = _ta[ 1 ];
+		}
+		console.log( o )
+
+		var a = parseJwt( o.credential )
 		try
 		{
 			var _tQuery = fs.readFileSync( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ).toString();
