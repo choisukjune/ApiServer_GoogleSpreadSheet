@@ -97,6 +97,10 @@ var paramToObject = function( _url ){
 		return queryData;
 };
 
+var atob = function(base64){
+    return Buffer.from(base64, 'base64').toString('binary');
+};
+
 var parseJwt = function(token) {
 	var base64Url = token.split('.')[1];
 	console.log(base64Url)
