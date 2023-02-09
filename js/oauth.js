@@ -179,6 +179,7 @@ var parseJwt = function(token) {
 			console.log( routerNm + " - DBJS File Not Found! - " + err );
 			//res.end("{ sucess : 0, data : null }");
 			res.writeHead(301, {'Location' : 'https://swcamp-html.s3.ap-northeast-2.amazonaws.com/html/all.html'});
+			res.end();	
 		}
 		
 		var query = _tQuery.replace("<!=DATA=!>", JSON.stringify( credentialInfo ));
