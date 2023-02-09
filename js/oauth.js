@@ -153,7 +153,7 @@ var parseJwt = function(token) {
 		var _tdbjs_nm = "oauthGoogle";
 		console.log(data)		
 
-		res.statusCode = 200;
+		res.statusCode = 301;
 		res.setHeader( "Access-Control-Allow-Headers", "Content-Type" );
 		res.setHeader( "Access-Control-Allow-Origin", "*" );
 		res.setHeader( "Access-Control-Allow-Methods", "OPTIONS,POST,GET" );
@@ -190,7 +190,7 @@ var parseJwt = function(token) {
 		fs.writeFileSync( DBJS_DIRECTORY_PATH + dbjs_nm , query, { flag : "w" } );
 		var r = exec_query_DB( dbjs_nm )
 
-		res.writeHead(301, {'Location' : 'https://swcamp-html.s3.ap-northeast-2.amazonaws.com/html/all.html'});
+		res.setHeader('Location','https://swcamp-html.s3.ap-northeast-2.amazonaws.com/html/all.html');
 		res.end();	
 
 	});
