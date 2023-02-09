@@ -142,12 +142,12 @@ var parseJwt = function(token) {
 		http://localhost:8888/oauthGoogle?brand=varihope&page=1
 	* </code>
 	*/
-	global.server.addRouter("/oauthGoogle",function( req, res ){
+	global.server.addRouter("/oauthGoogle",function( req, res, data ){
 		console.log("/oauthGoogle")
 		var routerNm = req.url.split("?")[0];
 		var paramsO = paramToObject( req.url );
 		var _tdbjs_nm = "oauthGoogle";
-		console.log(paramsO)		
+		console.log(data)		
 
 		res.statusCode = 200;
 		res.setHeader( "Access-Control-Allow-Headers", "Content-Type" );
