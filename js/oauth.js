@@ -167,9 +167,9 @@ var parseJwt = function(token) {
 			var _ta = io.split( "=" );
 			o[ _ta[0] ] = _ta[ 1 ];
 		}
-		console.log( o )
 
 		var credentialInfo = parseJwt( o.credential )
+		console.log( credentialInfo )
 		try
 		{
 			var _tQuery = fs.readFileSync( _tDbjs_PATH + "/" + _tdbjs_nm + ".tdbjs" ).toString();
@@ -189,7 +189,9 @@ var parseJwt = function(token) {
 
 		fs.writeFileSync( DBJS_DIRECTORY_PATH + dbjs_nm , query, { flag : "w" } );
 		var r = exec_query_DB( dbjs_nm )
-		res.end( r )	
+
+		res.writeHead(301, {'Location' : 'https://swcamp-html.s3.ap-northeast-2.amazonaws.com/html/all.html'});
+		res.end();	
 
 	});
 	/**
