@@ -155,8 +155,10 @@ if( console ) console.log( "[ S ] - " + fileNm + "----------" );
 		}
 		delete data[ "$height" ];
         console.log( data )
-		var query = _tQuery.replace( "<!=DATA=!>", JSON.stringify( data.data ) )
-                .replace( "<!=DOC_id=!>", JSON.stringify( data .doc_id ) );
+		_d = JSON.parse( data );
+
+		var query = _tQuery.replace( "<!=DATA=!>", JSON.stringify( _d.data ) )
+                .replace( "<!=DOC_id=!>", JSON.stringify( _d.doc_id ) );
 		var dbjs_nm = "update.dbjs";
 
 		var FILE_PATH = DBJS_DIRECTORY_PATH + dbjs_nm;
