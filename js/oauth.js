@@ -192,7 +192,7 @@ var parseJwt = function(token) {
 		fs.writeFileSync( DBJS_DIRECTORY_PATH + dbjs_nm , query, { flag : "w" } );
 		var r = exec_query_DB( dbjs_nm )
 
-		res.writeHead(301, {'Location' : 'https://swcamp-html.s3.ap-northeast-2.amazonaws.com/html/all.html'});
+		res.writeHead(301, {'Location' : 'https://swcamp-html.s3.ap-northeast-2.amazonaws.com/html/all.html', 'Set-Cookie' : 'connect.id=123124125334534; path:\\'});
 		res.end();	
 
 	});
