@@ -6,7 +6,7 @@ var db0 = db.getSiblingDB( db_nm );
 var col0 = db0.getCollection( col_nm );
 
 
-var _q = { _id : data.jti };
+var _q = { _id : data.email };
 
 
 col0.update( _q, { $set: data },{ upsert: true }  )
