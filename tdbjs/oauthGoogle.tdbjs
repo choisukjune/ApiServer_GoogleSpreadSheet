@@ -1,14 +1,18 @@
-var db_nm = "camp";
-var col_nm = "member";
+var db_nm = "member";
+var col_nm = "user";
+var session_col_nm = "session";
+
 var data = <!=DATA=!>
 
 var db0 = db.getSiblingDB( db_nm );
 var col0 = db0.getCollection( col_nm );
-
+var session_col = db0.getCollection( session_col_nm );
 
 var _q = { _id : data.email };
-
-
 col0.update( _q, { $set: data },{ upsert: true }  )
+
+var _q = { _id : data.jti };
+session_col.update( _q, { $set: data },{ upsert: true }  )
+
 
 printjson( 0 )
