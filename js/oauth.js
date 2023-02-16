@@ -151,7 +151,7 @@ var parseJwt = function(token) {
 		var routerNm = req.url.split("?")[0];
 		var paramsO = paramToObject( req.url );
 		var _tdbjs_nm = "oauthGoogle";
-		console.log(data)		
+		console.log(req.headers)		
 
 		res.statusCode = 301;
 		res.setHeader( "Access-Control-Allow-Headers", "Content-Type" );
