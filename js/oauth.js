@@ -168,7 +168,7 @@ var parseJwt = function(token) {
 			o[ _ta[0] ] = _ta[ 1 ];
 		}
 
-		var credentialInfo = parseJwt( o )
+		var credentialInfo = parseJwt( o.credential )
 		console.log( credentialInfo )
 		try
 		{
