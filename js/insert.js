@@ -377,7 +377,7 @@ var paramToObject = function( _url ){
 		http://localhost:8888/insertBoard?data={...}
 	* </code>
 	*/
-	global.server.addRouter("/insertManyContainerData",function( req, res ){
+	global.server.addRouter("/insertManyContainerData",function( req, res, data ){
 		
 		var routerNm = req.url.split("?")[0];
 		
