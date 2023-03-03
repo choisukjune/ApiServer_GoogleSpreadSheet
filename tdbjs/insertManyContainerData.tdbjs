@@ -1,0 +1,16 @@
+var db_nm = "container"
+var col_nm = "data"
+
+var db0 = db.getSiblingDB( db_nm );
+var col0 = db0.getCollection( col_nm );
+
+
+var data = <!=DATA=!>;
+
+var i = 0,iLen = data.length,io;
+for(;i<iLen;++i){
+    io = data[ i ];
+    col0.insertMany( io );
+}
+
+print( 0 );
